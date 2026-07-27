@@ -1,0 +1,62 @@
+@import "lenis/dist/lenis.css";
+@import "tailwindcss";
+
+@theme {
+  --color-snow: #ffffff;
+  --color-paper: #f8f9fa;
+  --color-cloud: #f1f3f5;
+  --color-mist: #e9ecef;
+  --color-midnight: #0a0e17;
+  --color-obsidian: #1a1a2e;
+  --color-accent: #1d4ed8;
+  --color-accent-light: #3b82f6;
+  --color-accent-dark: #1e3a5f;
+  --color-accent-glow: #60a5fa;
+  --color-sage: #16a34a;
+  --color-sage-light: #22c55e;
+  --color-text-primary: #111827;
+  --color-text-secondary: #4b5563;
+  --color-text-muted: #9ca3b8;
+
+  --font-display: "Bricolage Grotesque", system-ui, sans-serif;
+  --font-body: "Outfit", system-ui, sans-serif;
+  --font-mono: "JetBrains Mono", monospace;
+  --font-arabic: "Noto Kufi Arabic", "Outfit", sans-serif;
+}
+
+* {
+  box-sizing: border-box;
+}
+
+html {
+  scrollbar-width: thin;
+  scrollbar-color: #1d4ed8 #f1f3f5;
+}
+
+body {
+  font-family: var(--font-body);
+  background-color: #ffffff;
+  color: #111827;
+  overflow-x: hidden;
+  -webkit-font-smoothing: antialiased;
+  -moz-osx-font-smoothing: grayscale;
+}
+
+::selection {
+  background-color: #1d4ed8;
+  color: #ffffff;
+}
+
+
+/* Scroll progress bar — GSAP-driven via ScrollTrigger */
+.scroll-progress {
+  position: fixed;
+  top: 0;
+  left: 0;
+  right: 0;
+  height: 3px;
+  background: #1d4ed8;
+  transform-origin: left;
+  transform: scaleX(0);
+  z-index: 60;
+}
