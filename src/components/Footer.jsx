@@ -4,7 +4,7 @@ export default function Footer() {
   const { t } = useI18n()
 
   return (
-    <footer aria-label="Site footer" className="border-t border-black/5 py-10 bg-paper">
+    <footer aria-label="Site footer" className="border-t border-black/5 py-10 bg-paper z-100">
       <div className="max-w-6xl mx-auto px-8 lg:px-12">
         <div className="grid grid-cols-1 md:grid-cols-4 gap-16 text-center md:text-start">
           <div className="md:col-span-1">

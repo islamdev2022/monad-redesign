@@ -65,7 +65,7 @@ export default function Clients() {
   const doubled = [...clients, ...clients, ...clients, ...clients]
 
   return (
-    <section id="clients" ref={sectionRef} className="relative py-16 lg:py-20 bg-snow overflow-hidden">
+    <section id="clients" ref={sectionRef} className="relative py-16 lg:py-20 bg-transparent overflow-hidden">
       <div className="max-w-7xl mx-auto px-6 lg:px-8">
         <p className="text-sm text-text-muted uppercase tracking-widest font-medium mb-12 text-center">
           {t('clients.title')}

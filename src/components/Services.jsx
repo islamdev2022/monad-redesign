@@ -8,15 +8,12 @@ const icons = [
   <svg className="w-6 h-6" fill="none" viewBox="0 0 24 24" stroke="currentColor" strokeWidth={1.5}><path strokeLinecap="round" strokeLinejoin="round" d="M3.75 6A2.25 2.25 0 016 3.75h2.25A2.25 2.25 0 0110.5 6v2.25a2.25 2.25 0 01-2.25 2.25H6a2.25 2.25 0 01-2.25-2.25V6zM3.75 15.75A2.25 2.25 0 016 13.5h2.25a2.25 2.25 0 012.25 2.25V18a2.25 2.25 0 01-2.25 2.25H6A2.25 2.25 0 013.75 18v-2.25zM13.5 6a2.25 2.25 0 012.25-2.25H18A2.25 2.25 0 0120.25 6v2.25A2.25 2.25 0 0118 10.5h-2.25a2.25 2.25 0 01-2.25-2.25V6zM13.5 15.75a2.25 2.25 0 012.25-2.25H18a2.25 2.25 0 012.25 2.25V18A2.25 2.25 0 0118 20.25h-2.25A2.25 2.25 0 0113.5 18v-2.25z" /></svg>,
 ]
 
-const visualStates = [
-  { label: 'OCR', desc: 'Document → Text', progress: 87 },
-  { label: 'Extract', desc: 'Web → Data', progress: 64 },
-  { label: 'Collect', desc: 'Pipeline → Output', progress: 92 },
-]
+const progressValues = [87, 64, 92]
 
 export default function Services() {
   const { t } = useI18n()
   const items = t('services.items')
+  const visualStates = t('services.visual')
   const sectionRef = useRef(null)
   const textBlocksRef = useRef([])
   const progressBarsRef = useRef([])
@@ -46,7 +43,7 @@ export default function Services() {
 
         progressBarsRef.current.forEach((bar, i) => {
           if (!bar) return
-          const targetWidth = i === index ? visualStates[i].progress : 0
+          const targetWidth = i === index ? progressValues[i] : 0
           gsap.to(bar, {
             width: `${targetWidth}%`,
             duration: 0.8,
@@ -56,7 +53,7 @@ export default function Services() {
 
         percentLabelsRef.current.forEach((label, i) => {
           if (!label) return
-          const target = i === index ? visualStates[i].progress : 0
+          const target = i === index ? progressValues[i] : 0
           gsap.to(label, {
             innerText: target,
             duration: 0.6,
@@ -115,7 +112,7 @@ export default function Services() {
   }, [items])
 
   return (
-    <section id="services" ref={sectionRef} className="relative py-24 lg:py-32 bg-cloud/50">
+    <section id="services" ref={sectionRef} className="relative py-24 lg:py-32 bg-transparent">
       <div className="max-w-7xl mx-auto px-6 lg:px-8">
         <div className="text-center mb-20">
           <span className="text-xs font-mono font-medium text-accent uppercase tracking-widest">
@@ -152,7 +149,7 @@ export default function Services() {
                             ref={(el) => (percentLabelsRef.current[i] = el)}
                             className="text-xs text-text-muted font-mono"
                           >
-                            {i === 0 ? `${state.progress}%` : '0%'}
+                            {i === 0 ? `${progressValues[i]}%` : '0%'}
                           </span>
                         </div>
                         <div className="h-2 bg-cloud rounded-full overflow-hidden">
@@ -160,7 +157,7 @@ export default function Services() {
                             ref={(el) => (progressBarsRef.current[i] = el)}
                             className="h-full bg-accent rounded-full"
                             style={{
-                              width: i === 0 ? `${state.progress}%` : '0%',
+                              width: i === 0 ? `${progressValues[i]}%` : '0%',
                             }}
                           />
                         </div>
@@ -172,7 +169,7 @@ export default function Services() {
 
                 <div className="mt-6 pt-5 border-t border-black/5 flex items-center gap-2">
                   <div className="w-2 h-2 rounded-full bg-sage animate-pulse" />
-                  <span className="text-xs text-text-muted">Processing pipeline active</span>
+                  <span className="text-xs text-text-muted">{t('services.pipelineStatus')}</span>
                 </div>
               </div>
             </div>

@@ -154,7 +154,7 @@ export default function Products({ onDiscover }) {
   }, [items])
 
   return (
-    <section id="products" ref={sectionRef} className="relative bg-snow pt-36 pb-20 lg:pt-40 lg:pb-28">
+    <section id="products" ref={sectionRef} className="relative bg-transparent pt-28 pb-16 lg:pt-36 lg:pb-20">
       <div className="max-w-6xl mx-auto px-6 lg:px-8">
         {/* Header — NOT inside the pinned area */}
         <div className="mb-16 text-center">

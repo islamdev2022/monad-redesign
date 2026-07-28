@@ -57,6 +57,12 @@ const translations = {
       label: 'Data Services',
       title: 'Raw data, refined',
       description: 'Whether from the internet or physical documents, we get you the data you need in the structure you require.',
+      pipelineStatus: 'Processing pipeline active',
+      visual: [
+        { label: 'OCR', desc: 'Document → Text' },
+        { label: 'Extract', desc: 'Web → Data' },
+        { label: 'Collect', desc: 'Pipeline → Output' },
+      ],
       items: [
         { title: 'OCR Solutions', description: 'Convert scanned documents and images into editable, searchable text with Arabic and French support.' },
         { title: 'Data Extraction', description: 'Pull structured data from websites and online sources — product info, pricing, reviews — at scale.' },
@@ -93,7 +99,7 @@ const translations = {
       services: 'Services',
       company: 'Company',
       contactLink: 'Contact',
-      copyright: '© 2025 Monad. All rights reserved.',
+      copyright: '© 2026 Monad. All rights reserved.',
       builtFor: 'Built for Algeria',
     },
     pricing: {
@@ -230,6 +236,12 @@ const translations = {
       label: 'Services de données',
       title: 'Données brutes, raffinées',
       description: "Qu'il s'agisse d'internet ou de documents physiques, nous vous fournissons les données dont vous avez besoin dans la structure requise.",
+      pipelineStatus: 'Pipeline de traitement actif',
+      visual: [
+        { label: 'OCR', desc: 'Document → Texte' },
+        { label: 'Extraction', desc: 'Web → Données' },
+        { label: 'Collecte', desc: 'Pipeline → Sortie' },
+      ],
       items: [
         { title: 'Solutions OCR', description: "Convertissez documents numérisés et images en texte éditable et recherchable avec support arabe et français." },
         { title: 'Extraction de données', description: "Extrayez des données structurées de sites web et sources en ligne — infos produits, prix, avis — à grande échelle." },
@@ -266,7 +278,7 @@ const translations = {
       services: 'Services',
       company: 'Entreprise',
       contactLink: 'Contact',
-      copyright: '© 2025 Monad. Tous droits réservés.',
+      copyright: '© 2026 Monad. Tous droits réservés.',
       builtFor: "Conçu pour l'Algérie",
     },
     pricing: {
@@ -359,8 +371,8 @@ const translations = {
     hero: {
       badge: 'خبرة محلية، تكنولوجيا عالمية',
       title1: 'تمكين الصناعات',
-      title2: 'الجزائرية بحلول',
-      titleAccent: 'ذكاء اصطناعي مخصص',
+      title2: ' الجزائرية من خلال حلول',
+      titleAccent: 'الذكاء الاصطناعي المصممة خصيصاً لها',
       description: 'من الاستماع الاجتماعي إلى البحث الدلالي، نبني أدوات ذكاء اصطناعي مصممة لخصوصيات السوق الجزائري — بكل لغة يتحدثها عملك.',
       cta1: 'اكتشف منتجاتنا',
       cta2: 'احجز مكالمة',
@@ -403,6 +415,12 @@ const translations = {
       label: 'خدمات البيانات',
       title: 'بيانات خام، مُكررة',
       description: 'سواء من الإنترنت أو المستندات المادية، نوفر لك البيانات التي تحتاجها بالهيكل المطلوب.',
+      pipelineStatus: 'خط أنابيب المعالجة نشط',
+      visual: [
+        { label: 'التعرف الضوئي', desc: 'مستند ← نص' },
+        { label: 'الاستخراج', desc: 'ويب ← بيانات' },
+        { label: 'الجمع', desc: 'خط أنابيب ← مخرجات' },
+      ],
       items: [
         { title: 'حلول التعرف الضوئي', description: 'حوّل المستندات الممسوحة والصور إلى نص قابل للتحرير والبحث مع دعم العربية والفرنسية.' },
         { title: 'استخراج البيانات', description: 'استخرج بيانات منظمة من المواقع والمصادر الإلكترونية — معلومات المنتجات، الأسعار، المراجعات — على نطاق واسع.' },
@@ -439,7 +457,7 @@ const translations = {
       services: 'الخدمات',
       company: 'الشركة',
       contactLink: 'اتصل بنا',
-      copyright: '© 2025 موناد. جميع الحقوق محفوظة.',
+      copyright: '© 2026 موناد. جميع الحقوق محفوظة.',
       builtFor: 'صُنع للجزائر',
     },
     pricing: {

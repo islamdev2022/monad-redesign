@@ -11,6 +11,7 @@ import Contact from './components/Contact'
 import Footer from './components/Footer'
 import ScrollProgress from './components/ScrollProgress'
 import ProductModal from './components/ProductModal'
+import Threads from './components/Threads'
 
 export default function App() {
   const { dir, lang } = useI18n()
@@ -19,6 +20,17 @@ export default function App() {
 
   return (
     <div className="min-h-screen bg-snow w-full relative" dir={dir} lang={lang} style={{ fontFamily: dir === 'rtl' ? 'var(--font-arabic)' : undefined }}>
+      {/* Fixed Threads background — visible behind all sections, hero covers it with its own bg */}
+      <div className="fixed inset-0 z-0 pointer-events-none">
+        <Threads
+          color={[0.114, 0.306, 0.847]}
+          amplitude={0.6}
+          distance={0.4}
+          className="opacity-30"
+          enableMouseInteraction
+        />
+      </div>
+
       <ScrollProgress />
       <Navbar />
       <Hero />
@@ -28,6 +40,7 @@ export default function App() {
       <Clients />
       <Contact />
       <Footer />
+
       {modalProduct && (
         <ProductModal product={modalProduct} onClose={() => setModalProduct(null)} />
       )}

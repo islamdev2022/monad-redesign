@@ -55,7 +55,7 @@ export default function Contact() {
   }
 
   return (
-    <section id="contact" ref={sectionRef} className="relative py-20 lg:py-28 bg-snow">
+    <section id="contact" ref={sectionRef} className="relative py-20 lg:py-28 bg-transparent">
       <div className="absolute top-0 left-1/2 -translate-x-1/2 w-px h-20 bg-gradient-to-b from-transparent via-accent/30 to-transparent" />
 
       <div className="max-w-7xl mx-auto px-6 lg:px-8">

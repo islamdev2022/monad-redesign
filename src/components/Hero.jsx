@@ -112,7 +112,10 @@ export default function Hero() {
       </div>
 
       {/* Foreground content — moves faster */}
-      <div ref={fgLayerRef} className="relative z-20 max-w-7xl mx-auto px-6 lg:px-8 w-full text-center">
+      <div ref={fgLayerRef} className="relative z-20 max-w-7xl mx-auto px-6 lg:px-8 w-full text-center h-screen flex flex-col items-center justify-center pointer-events-none">
+        <p className=" text-xs sm:text-sm text-blue-700 bg-accent-light/[0.2] tracking-widest font-medium mb-4 border border-blue-700/20 rounded-full px-4 py-1 inline-block sm:uppercase">
+          {t('hero.badge')}
+        </p>
         <div className="mx-auto flex flex-col items-center justify-center">
           <h1
             ref={headlineRef}
@@ -135,7 +138,7 @@ export default function Hero() {
             {t('hero.description')}
           </p>
 
-          <div ref={ctaRef} className="flex flex-wrap justify-center gap-4">
+          <div ref={ctaRef} className="flex flex-wrap justify-center gap-4 pointer-events-auto">
             <a
               href="https://forms.gle/WfCszpzeqXJgvbwp7"
               target="_blank"
@@ -155,7 +158,7 @@ export default function Hero() {
       </div>
 
       {/* Scroll indicator */}
-      <div className="absolute bottom-8 left-1/2 -translate-x-1/2 z-20 opacity-60">
+      <div className="absolute bottom-2 left-1/2 -translate-x-1/2 z-20 opacity-60">
         <div className="flex flex-col items-center gap-2">
           <span className="text-xs text-text-muted tracking-widest uppercase">{t('hero.scroll')}</span>
           <div className="w-px h-8 bg-gradient-to-b from-accent/60 to-transparent" />
