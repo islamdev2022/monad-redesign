@@ -1,4 +1,4 @@
-import { useState, useEffect } from 'react'
+import { useState, useEffect, useCallback } from 'react'
 import { motion, AnimatePresence } from 'framer-motion'
 import { useI18n } from '../i18n.jsx'
 import { useSmoothNav } from '../hooks/useScrollEngine.js'
@@ -6,6 +6,7 @@ import { useSmoothNav } from '../hooks/useScrollEngine.js'
 export default function Navbar() {
   const [scrolled, setScrolled] = useState(false)
   const [mobileOpen, setMobileOpen] = useState(false)
+  const [activeSection, setActiveSection] = useState('hero')
   const { t, lang, setLang } = useI18n()
   const handleNav = useSmoothNav()
 
@@ -15,11 +16,36 @@ export default function Navbar() {
     return () => window.removeEventListener('scroll', onScroll)
   }, [])
 
+  // Active section detection
+  useEffect(() => {
+    let rafId = null
+    const sectionIds = ['hero', 'products', 'services', 'pricing', 'clients', 'contact']
+
+    function detect() {
+      const viewportMid = window.innerHeight * 0.35
+      let current = 'hero'
+      for (const id of sectionIds) {
+        const el = document.getElementById(id)
+        if (!el) continue
+        const rect = el.getBoundingClientRect()
+        if (rect.top <= viewportMid && rect.bottom > viewportMid) {
+          current = id
+          break
+        }
+      }
+      setActiveSection(current)
+      rafId = requestAnimationFrame(detect)
+    }
+
+    rafId = requestAnimationFrame(detect)
+    return () => cancelAnimationFrame(rafId)
+  }, [])
+
   const links = [
-    { label: t('nav.products'), href: '#products' },
-    { label: t('nav.services'), href: '#services' },
-    { label: t('nav.clients'), href: '#clients' },
-    { label: t('nav.contact'), href: '#contact' },
+    { label: t('nav.products'), href: '#products', id: 'products' },
+    { label: t('nav.services'), href: '#services', id: 'services' },
+    { label: t('nav.clients'), href: '#clients', id: 'clients' },
+    { label: t('nav.contact'), href: '#contact', id: 'contact' },
   ]
 
   const langs = [
@@ -40,10 +66,10 @@ export default function Navbar() {
           : 'bg-transparent'
       }`}
     >
-      <div className=" mx-auto px-8 lg:px-12">
+      <div className="mx-auto px-6 lg:px-12">
         <div className="flex items-center justify-between h-20">
           <a href="#" onClick={handleNav} className="flex items-center gap-3 group">
-           <img src="/Monad_files/MONAD-Presentation-removebg-preview-removebg-preview.png" alt="Monad — AI Solutions for Algeria" className="h-10 w-auto" />
+            <img src="/Monad_files/MONAD-Presentation-removebg-preview-removebg-preview.png" alt="Monad — AI Solutions for Algeria" className="h-10 w-auto" />
           </a>
 
           <div className="hidden md:flex items-center gap-8">
@@ -52,7 +78,11 @@ export default function Navbar() {
                 key={link.href}
                 href={link.href}
                 onClick={handleNav}
-                className="text-sm text-text-secondary hover:text-accent transition-colors duration-300 font-medium"
+                className={`text-sm font-medium transition-colors duration-300 ${
+                  activeSection === link.id
+                    ? 'text-accent'
+                    : 'text-text-secondary hover:text-accent'
+                }`}
               >
                 {link.label}
               </a>
@@ -79,7 +109,7 @@ export default function Navbar() {
               href="https://forms.gle/WfCszpzeqXJgvbwp7"
               target="_blank"
               rel="noopener noreferrer"
-              className=" bg-accent hover:bg-accent-light text-white text-sm font-medium px-6 py-1 rounded-2xl transition-all duration-300 hover:shadow-[0_4px_20px_rgba(29,78,216,0.25)]"
+              className="bg-accent hover:bg-accent-light text-white text-sm font-medium px-6 py-2 rounded-2xl transition-all duration-300 hover:shadow-[0_4px_20px_rgba(29,78,216,0.25)]"
             >
               {t('nav.cta')}
             </a>
@@ -102,23 +132,40 @@ export default function Navbar() {
       <AnimatePresence>
         {mobileOpen && (
           <motion.div
-            initial={{ opacity: 0, height: 0 }}
-            animate={{ opacity: 1, height: 'auto' }}
-            exit={{ opacity: 0, height: 0 }}
+            initial={{ opacity: 0, y: -20 }}
+            animate={{ opacity: 1, y: 0 }}
+            exit={{ opacity: 0, y: -20 }}
+            transition={{ duration: 0.3, ease: [0.22, 1, 0.36, 1] }}
             className="md:hidden bg-white/95 backdrop-blur-xl border-t border-black/5"
           >
-            <div className="px-6 py-6 space-y-4">
-              {links.map((link) => (
-                <a
-                  key={link.href}
-                  href={link.href}
-                  onClick={(e) => { handleNav(e); setMobileOpen(false) }}
-                  className="block text-lg text-text-secondary hover:text-accent transition-colors"
-                >
-                  {link.label}
-                </a>
-              ))}
-              <div className="flex gap-2 pt-2">
+            <div className="px-6 py-8 flex flex-col items-center">
+              {/* Logo centered */}
+              <img
+                src="/Monad_files/MONAD-Presentation-removebg-preview-removebg-preview.png"
+                alt="Monad"
+                className="h-8 w-auto mb-6"
+              />
+
+              {/* Nav links */}
+              <div className="space-y-3 w-full text-center">
+                {links.map((link) => (
+                  <a
+                    key={link.href}
+                    href={link.href}
+                    onClick={(e) => { handleNav(e); setMobileOpen(false) }}
+                    className={`block text-lg font-medium py-2 transition-colors ${
+                      activeSection === link.id
+                        ? 'text-accent'
+                        : 'text-text-secondary'
+                    }`}
+                  >
+                    {link.label}
+                  </a>
+                ))}
+              </div>
+
+              {/* Language switcher */}
+              <div className="flex gap-2 mt-6">
                 {langs.map((l) => (
                   <button
                     key={l.code}
@@ -133,11 +180,15 @@ export default function Navbar() {
                   </button>
                 ))}
               </div>
+
+              {/* CTA */}
               <a
-                href="#contact"
-                className="block bg-accent text-white text-center font-medium px-5 py-5 rounded-lg mt-4"
+                href="https://forms.gle/WfCszpzeqXJgvbwp7"
+                target="_blank"
+                rel="noopener noreferrer"
+                className="block w-full bg-accent hover:bg-accent-light text-white text-center font-semibold px-5 py-4 rounded-xl mt-6 transition-all duration-300"
               >
-                {/* {t('nav.cta')} */}
+                {t('nav.cta')}
               </a>
             </div>
           </motion.div>
